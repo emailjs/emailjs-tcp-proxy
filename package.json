@@ -1,0 +1,63 @@
+{
+  "name": "emailjs-tcp-proxy",
+  "version": "1.0.0",
+  "description": "Tunnels tcp connections to Socket.IO without TLS termination",
+  "main": "dist/server.js",
+  "scripts": {
+    "build": "./scripts/build.sh",
+    "release": "./scripts/release.sh",
+    "lint": "$(npm bin)/standard",
+    "test": "npm run lint && npm run unit",
+    "unit": "$(npm bin)/mocha './src/*-unit.js' --reporter spec --require babel-register testutils.js",
+    "test-watch": "$(npm bin)/mocha './src/*-unit.js' --reporter spec --require babel-register testutils.js --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emailjs/emailjs-tcp-proxy.git"
+  },
+  "keywords": [
+    "emailjs",
+    "sockets",
+    "tcp",
+    "tls",
+    "raw",
+    "sockets"
+  ],
+  "author": "Felix Hammerl <felix.hammerl@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/emailjs/emailjs-tcp-proxy/issues"
+  },
+  "homepage": "https://github.com/emailjs/emailjs-tcp-proxy#readme",
+  "standard": {
+    "globals": [
+      "describe",
+      "it",
+      "before",
+      "beforeEach",
+      "afterEach",
+      "after",
+      "expect"
+    ],
+    "ignore": [
+      "dist"
+    ]
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-register": "^6.26.0",
+    "chai": "^4.1.2",
+    "mocha": "^4.0.1",
+    "nodemon": "^1.12.1",
+    "pre-commit": "^1.2.2",
+    "standard": "^10.0.3"
+  },
+  "dependencies": {
+    "config": "^1.28.1",
+    "express": "^4.16.2",
+    "morgan": "^1.9.0",
+    "npmlog": "^4.1.2",
+    "socket.io": "^2.0.4"
+  }
+}
