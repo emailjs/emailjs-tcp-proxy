@@ -4,12 +4,13 @@
   "description": "Tunnels tcp connections to Socket.IO without TLS termination",
   "main": "dist/server.js",
   "scripts": {
+    "start": "node dist/server.js",
+    "start-dev": "npx babel-node src/server.js --presets env",
     "build": "./scripts/build.sh",
     "release": "./scripts/release.sh",
     "lint": "$(npm bin)/standard",
-    "test": "npm run lint && npm run unit",
-    "unit": "$(npm bin)/mocha './src/*-unit.js' --reporter spec --require babel-register testutils.js",
-    "test-watch": "$(npm bin)/mocha './src/*-unit.js' --reporter spec --require babel-register testutils.js --watch"
+    "test": "npm run lint && npm run integration",
+    "integration": "NODE_ENV=integration npx mocha './src/*-integration.js' --reporter spec --require babel-register testutils.js"
   },
   "repository": {
     "type": "git",
@@ -49,9 +50,12 @@
     "babel-register": "^6.26.0",
     "chai": "^4.1.2",
     "mocha": "^4.0.1",
+    "node-forge": "^0.7.1",
     "nodemon": "^1.12.1",
     "pre-commit": "^1.2.2",
-    "standard": "^10.0.3"
+    "socket.io-client": "^2.0.4",
+    "standard": "^10.0.3",
+    "starttls": "https://github.com/felixhammerl/starttls/tarball/master"
   },
   "dependencies": {
     "config": "^1.28.1",
