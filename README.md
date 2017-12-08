@@ -1,5 +1,7 @@
 # emailjs-tcp-proxy
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/emailjs/emailjs-tcp-proxy.svg)](https://greenkeeper.io/)
+
 Tunnels tcp connections to socketio without TLS termination
 
 ## Usage as library to use in your own services
