@@ -1,9 +1,8 @@
 import cluster from 'cluster'
-import config from 'config'
 import log from 'npmlog'
 import startProxy from './proxy'
 
-log.level = config.log.level
+const port = process.env.PROXY_PORT || 8888
 
 const exit = (signal, exitCode) => () => {
   log.warn('exit', `Exited on ${signal}`)
@@ -38,5 +37,5 @@ if (cluster.isMaster) {
 
   cluster.fork()
 } else {
-  startProxy()
+  startProxy(port)
 }

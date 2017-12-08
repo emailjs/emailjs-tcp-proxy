@@ -1,6 +1,6 @@
 {
   "name": "emailjs-tcp-proxy",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Tunnels tcp connections to Socket.IO without TLS termination",
   "main": "dist/proxy.js",
   "scripts": {
@@ -58,7 +58,6 @@
     "starttls": "https://github.com/felixhammerl/starttls/tarball/master"
   },
   "dependencies": {
-    "config": "^1.28.1",
     "express": "^4.16.2",
     "morgan": "^1.9.0",
     "npmlog": "^4.1.2",

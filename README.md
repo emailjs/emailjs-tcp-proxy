@@ -7,7 +7,8 @@ Tunnels tcp connections to socketio without TLS termination
 ```javascript
 import startProxy from 'emailjs-tcp-proxy'
 
-startProxy()
+const port = 12345
+startProxy(port)
   .then(proxy => {
     ...
     proxy.close()
@@ -19,5 +20,5 @@ startProxy()
 ```bash
 git clone git@github.com:emailjs/emailjs-tcp-proxy.git
 cd emailjs-tcp-proxy
-NODE_ENV=production npm start
+PROXY_PORT=1234 npm start
 ```
