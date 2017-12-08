@@ -2,7 +2,7 @@
   "name": "emailjs-tcp-proxy",
   "version": "1.0.0",
   "description": "Tunnels tcp connections to Socket.IO without TLS termination",
-  "main": "dist/server.js",
+  "main": "dist/proxy.js",
   "scripts": {
     "start": "node dist/server.js",
     "start-dev": "npx babel-node src/server.js --presets env",
