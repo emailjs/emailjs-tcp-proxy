@@ -2,25 +2,32 @@
 
 import io from 'socket.io-client'
 import net from 'net'
-import startProxy from './proxy'
+import attachProxy from './proxy'
+import express from 'express'
+import { Server } from 'http'
 
 describe('WebSocket Shim', () => {
   const buffer = Uint8Array.from([1, 2, 3]).buffer
   const proxyPort = 8888
-  const echoPort = 8889
-  let echoServer
   let proxy
+  const echoPort = 8889
+  let echo
 
-  before(() => startProxy(proxyPort)
-    .then(pxy => { proxy = pxy }))
+  before((done) => {
+    proxy = Server(express())
+    proxy.listen(proxyPort, () => {
+      attachProxy(proxy)
+      done()
+    })
+  })
 
   beforeEach((done) => {
-    echoServer = net.createServer(socket => socket.pipe(socket))
-    echoServer.listen(echoPort, done)
+    echo = net.createServer(socket => socket.pipe(socket))
+    echo.listen(echoPort, done)
   })
 
   afterEach((done) => {
-    echoServer.close(done)
+    echo.close(done)
   })
 
   after(done => {

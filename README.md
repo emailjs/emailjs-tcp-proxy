@@ -5,14 +5,14 @@ Tunnels tcp connections to socketio without TLS termination
 ## Usage as library to use in your own services
 
 ```javascript
-import startProxy from 'emailjs-tcp-proxy'
+import attachProxy from 'emailjs-tcp-proxy'
+import express from 'express'
+import { Server } from 'http'
 
-const port = 12345
-startProxy(port)
-  .then(proxy => {
-    ...
-    proxy.close()
-  })
+const server = Server(express())
+server.listen(12345, () => {
+  attachProxy(server)
+})
 ```
 
 ## Usage as standalone

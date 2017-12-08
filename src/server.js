@@ -1,7 +1,13 @@
 import cluster from 'cluster'
 import log from 'npmlog'
-import startProxy from './proxy'
+import attachProxy from './proxy'
+import morgan from 'morgan'
+import express from 'express'
+import { Server } from 'http'
 
+const LOG_FORMAT = ':remote-addr [:date] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer"'
+
+log.level = 'silly'
 const port = process.env.PROXY_PORT || 8888
 
 const exit = (signal, exitCode) => () => {
@@ -37,5 +43,15 @@ if (cluster.isMaster) {
 
   cluster.fork()
 } else {
-  startProxy(port)
+  const app = express()
+  const server = Server(app)
+  app.disable('x-powered-by')
+  app.use(morgan(LOG_FORMAT, {
+    stream: { write: (line = '') => line.trim() && log.http('express', line) }
+  }))
+  server.listen(port, function () {
+    const {address, port} = server.address()
+    attachProxy(server, log)
+    log.info('express', 'Server listening on %s:%s', address, port)
+  })
 }
