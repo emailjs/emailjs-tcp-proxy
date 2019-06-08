@@ -50,7 +50,7 @@ if (cluster.isMaster) {
     stream: { write: (line = '') => line.trim() && log.http('express', line) }
   }))
   server.listen(port, function () {
-    const {address, port} = server.address()
+    const { address, port } = server.address()
     attachProxy(server, log)
     log.info('express', 'Server listening on %s:%s', address, port)
   })
